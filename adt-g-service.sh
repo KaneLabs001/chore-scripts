@@ -75,6 +75,10 @@ if [[ ! -f "$typesPath" ]]; then
   cat > "$typesPath" <<EOF
 import type { ${name} } from '@Entities/${name}';
 
+import { BaseQueryParamInput } from './common/BaseQueryParamInput';
+
+export class ${name}QueryParamsInput extends BaseQueryParamInput { }
+
 export type Create${name}Input = Partial<Omit<${name}, 'id' | 'createdAt' | 'updatedAt'>>;
 export type Update${name}Input = Partial<Omit<${name}, 'id' | 'createdAt' | 'updatedAt'>>;
 EOF
@@ -123,9 +127,7 @@ import { ${name} } from '@Entities/${name}';
 
 import { ${name}Repository } from '@Repositories/${name}Repository';
 
-import { Create${name}Input, Update${name}Input } from '@Services/types/${name}Input';
-
-import { ${name}QueryParams } from '@Rests/types/${name}Dto';
+import { Create${name}Input, Update${name}Input, ${name}QueryParamsInput } from '@Services/types/${name}Input';
 
 @Service()
 export class ${name}Service {
@@ -133,7 +135,7 @@ export class ${name}Service {
     private readonly ${varRepo}: ${name}Repository,
   ) {}
 
-  async findAllPaginated(params: ${name}QueryParams): Promise<HttpPaginatedResponse<${name}>> {
+  async findAllPaginated(params: ${name}QueryParamsInput): Promise<HttpPaginatedResponse<${name}>> {
     const { page, size, searchText, sortBy, sortDirection } = params;
     const skip = (page - 1) * size;
 
