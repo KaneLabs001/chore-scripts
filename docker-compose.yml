@@ -38,6 +38,19 @@ services:
     volumes:
       - postgres_data:/data/postgres
 
+  postgres16:
+    image: postgres:16
+    restart: always
+    ports:
+      - 5445:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: admin
+      POSTGRES_DB: airdata_company
+      PGDATA: /data/postgres16
+    volumes:
+      - postgres_data:/data/postgres16
+
 
 volumes:
   mongodb_data:
