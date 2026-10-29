@@ -49,7 +49,7 @@ services:
       POSTGRES_DB: airdata_company
       PGDATA: /data/postgres16
     volumes:
-      - postgres_data:/data/postgres16
+      - postgres_data16:/data/postgres16
 
 
 volumes:
@@ -58,4 +58,6 @@ volumes:
   redis_data:
     driver: local
   postgres_data:
+    driver: local
+  postgres_data16:
     driver: local
