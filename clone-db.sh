@@ -97,14 +97,14 @@ echo "--------------------------------------------------------------------"
 
 
 # Drop and create database using psql inside the selected Docker container
-docker exec -e PGPASSWORD=$LOCAL_PASSWORD $SELECTED_CONTAINER psql -U $LOCAL_USER -d postgres -c "DROP DATABASE IF EXISTS $SELECTED_DB;"
+docker exec -e PGPASSWORD=$LOCAL_PASSWORD $SELECTED_CONTAINER psql -U $LOCAL_USER -d postgres -c "DROP DATABASE IF EXISTS \"$SELECTED_DB\";"
 if [ $? -ne 0 ]; then
   echo "Error: Failed to drop the old database $SELECTED_DB in Docker container."
   exit 1
 fi
 
 echo "Creating new database $SELECTED_DB in Docker container..."
-docker exec -e PGPASSWORD=$LOCAL_PASSWORD $SELECTED_CONTAINER psql -U $LOCAL_USER -d postgres -c "CREATE DATABASE $SELECTED_DB;"
+docker exec -e PGPASSWORD=$LOCAL_PASSWORD $SELECTED_CONTAINER psql -U $LOCAL_USER -d postgres -c "CREATE DATABASE \"$SELECTED_DB\";"
 if [ $? -ne 0 ]; then
   echo "Error: Failed to create the new database $SELECTED_DB in Docker container."
   exit 1
